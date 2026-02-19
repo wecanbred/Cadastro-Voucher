@@ -3,135 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Colaborador - Voucher Uber</title>
+    <title>Cadastro Voucher Uber - We Can BR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --uber-black: #000000;
+            --primary-gradient: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            --uber-black: #1f2937;
             --uber-white: #ffffff;
-            --uber-gray: #f6f6f6;
+            --bg-light: #f3f4f6;
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: var(--uber-gray);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cabeçalho estilizado conforme a imagem */
+        .header {
+            background: linear-gradient(rgba(106, 17, 203, 0.6), rgba(37, 117, 252, 0.6)), 
+                        url('https://wecanbr.com.br/img/quem-somos/main.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 250px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
             margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .container {
-            background-color: var(--uber-white);
+            max-width: 800px;
+            margin: -50px auto 40px;
+            background: var(--uber-white);
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         h2 {
+            font-family: 'Montserrat', sans-serif;
             color: var(--uber-black);
-            margin-bottom: 25px;
-            font-weight: 700;
-            border-bottom: 2px solid var(--uber-black);
-            padding-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #6a11cb;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Grid de Formulário */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .form-group {
             margin-bottom: 15px;
         }
 
+        .full-width {
+            grid-column: span 2;
+        }
+
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
+            font-size: 12px;
+            font-weight: 700;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
             font-size: 14px;
+            transition: border-color 0.3s;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--uber-black);
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.1);
         }
 
         button {
-            width: 100%;
+            grid-column: span 2;
             background-color: var(--uber-black);
             color: white;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s;
+            margin-top: 10px;
+            transition: all 0.3s;
         }
 
         button:hover {
-            background-color: #333;
+            background-color: #000;
+            transform: translateY(-1px);
         }
 
         button:disabled {
             background-color: #ccc;
-            cursor: not-allowed;
         }
 
         #mensagem {
-            margin-top: 15px;
+            grid-column: span 2;
             text-align: center;
-            font-size: 14px;
+            padding: 15px;
+            border-radius: 6px;
             display: none;
+            font-weight: 600;
+        }
+
+        /* Responsividade para celular */
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            button { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
+<div class="header">
+    <h1>APOIO AO ONSITE</h1>
+</div>
+
 <div class="container">
     <h2>Cadastro Voucher Uber</h2>
+    
     <form id="cadastroForm">
-        <div class="form-group">
-            <label for="centroCusto">CENTRO DE CUSTO</label>
-            <input type="text" id="centroCusto" name="centroCusto" placeholder="Ex: LM Hub_SP_Jundiaí" required>
-        </div>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="centroCusto">CENTRO DE CUSTO</label>
+                <input type="text" id="centroCusto" placeholder="Ex: LM Hub_SP_Jundiaí" required>
+            </div>
 
-        <div class="form-group">
-            <label for="matricula">MATRÍCULA</label>
-            <input type="text" id="matricula" name="matricula" placeholder="Digite a WEmatrícula" required>
-        </div>
+            <div class="form-group">
+                <label for="matricula">MATRÍCULA</label>
+                <input type="text" id="matricula" placeholder="Digite a matrícula" required>
+            </div>
 
-        <div class="form-group">
-            <label for="nomeCompleto">NOME COMPLETO</label>
-            <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome do colaborador" required>
-        </div>
+            <div class="form-group">
+                <label for="nomeCompleto">NOME COMPLETO</label>
+                <input type="text" id="nomeCompleto" placeholder="Nome do colaborador" required>
+            </div>
 
-        <div class="form-group">
-            <label for="dataAdmissao">DATA DE ADMISSÃO</label>
-            <input type="date" id="dataAdmissao" name="dataAdmissao" required>
-        </div>
+            <div class="form-group">
+                <label for="dataAdmissao">DATA DE ADMISSÃO</label>
+                <input type="date" id="dataAdmissao" required>
+            </div>
 
-        <div class="form-group">
-            <label for="telefone">TELEFONE</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
-        </div>
+            <div class="form-group">
+                <label for="telefone">TELEFONE</label>
+                <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+            </div>
 
-        <div class="form-group">
-            <label for="horario">HORÁRIO</label>
-            <input type="time" id="horario" name="horario" required>
-        </div>
+            <div class="form-group">
+                <label for="horario">HORÁRIO</label>
+                <input type="time" id="horario" required>
+            </div>
 
-        <button type="submit" id="btnEnviar">CADASTRAR COLABORADOR</button>
-        <div id="mensagem"></div>
+            <button type="submit" id="btnEnviar">CADASTRAR COLABORADOR</button>
+            
+            <div id="mensagem"></div>
+        </div>
     </form>
 </div>
 
@@ -143,9 +199,8 @@
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Desativa o botão para evitar múltiplos cliques
         btn.disabled = true;
-        btn.innerText = "Enviando dados...";
+        btn.innerText = "PROCESSANDO...";
         msg.style.display = "none";
 
         const dados = {
@@ -157,24 +212,25 @@
             horario: document.getElementById('horario').value
         };
 
-        // Chama a função 'salvarDados' que deve estar no seu arquivo .gs
         google.script.run
-            .withSuccessHandler(function(response) {
-                msg.innerText = "Colaborador cadastrado com sucesso!";
-                msg.style.color = "green";
+            .withSuccessHandler(function() {
+                msg.innerText = "CADASTRO REALIZADO COM SUCESSO!";
+                msg.style.backgroundColor = "#dcfce7";
+                msg.style.color = "#166534";
                 msg.style.display = "block";
                 form.reset();
                 btn.disabled = false;
                 btn.innerText = "CADASTRAR COLABORADOR";
             })
             .withFailureHandler(function(error) {
-                msg.innerText = "Erro ao salvar: " + error;
-                msg.style.color = "red";
+                msg.innerText = "ERRO: " + error;
+                msg.style.backgroundColor = "#fee2e2";
+                msg.style.color = "#991b1b";
                 msg.style.display = "block";
                 btn.disabled = false;
                 btn.innerText = "CADASTRAR COLABORADOR";
             })
-            .salvarDados(dados); // Nome da função no arquivo Código.gs
+            .salvarDados(dados); 
     });
 </script>
 
