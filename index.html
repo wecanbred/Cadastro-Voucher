@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Colaborador - Voucher Uber</title>
+    <style>
+        :root {
+            --uber-black: #000000;
+            --uber-white: #ffffff;
+            --uber-gray: #f6f6f6;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: var(--uber-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--uber-white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            color: var(--uber-black);
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--uber-black);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--uber-black);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--uber-black);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #mensagem {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cadastro Voucher Uber</h2>
+    <form id="cadastroForm">
+        <div class="form-group">
+            <label for="centroCusto">CENTRO DE CUSTO</label>
+            <input type="text" id="centroCusto" name="centroCusto" placeholder="Ex: Logística 01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="matricula">MATRÍCULA</label>
+            <input type="text" id="matricula" name="matricula" placeholder="Digite a matrícula" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nomeCompleto">NOME COMPLETO</label>
+            <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome do colaborador" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dataAdmissao">DATA DE ADMISSÃO</label>
+            <input type="date" id="dataAdmissao" name="dataAdmissao" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">TELEFONE</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="form-group">
+            <label for="horario">HORÁRIO</label>
+            <input type="time" id="horario" name="horario" required>
+        </div>
+
+        <button type="submit" id="btnEnviar">CADASTRAR COLABORADOR</button>
+        <div id="mensagem"></div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('cadastroForm');
+    const btn = document.getElementById('btnEnviar');
+    const msg = document.getElementById('mensagem');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Desativa o botão para evitar múltiplos cliques
+        btn.disabled = true;
+        btn.innerText = "Enviando dados...";
+        msg.style.display = "none";
+
+        const dados = {
+            centroCusto: document.getElementById('centroCusto').value,
+            matricula: document.getElementById('matricula').value,
+            nomeCompleto: document.getElementById('nomeCompleto').value,
+            dataAdmissao: document.getElementById('dataAdmissao').value,
+            telefone: document.getElementById('telefone').value,
+            horario: document.getElementById('horario').value
+        };
+
+        // Chama a função 'salvarDados' que deve estar no seu arquivo .gs
+        google.script.run
+            .withSuccessHandler(function(response) {
+                msg.innerText = "Colaborador cadastrado com sucesso!";
+                msg.style.color = "green";
+                msg.style.display = "block";
+                form.reset();
+                btn.disabled = false;
+                btn.innerText = "CADASTRAR COLABORADOR";
+            })
+            .withFailureHandler(function(error) {
+                msg.innerText = "Erro ao salvar: " + error;
+                msg.style.color = "red";
+                msg.style.display = "block";
+                btn.disabled = false;
+                btn.innerText = "CADASTRAR COLABORADOR";
+            })
+            .salvarDados(dados); // Nome da função no arquivo Código.gs
+    });
+</script>
+
+</body>
+</html>
